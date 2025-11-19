@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JYZ COMPUTERS - Digital Solutions for Kenyan SMEs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #1a73e8;
+            --secondary: #0d47a1;
+            --accent: #34a853;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --gray: #5f6368;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #2d9249;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            min-height: 70px; /* Ensure consistent header height */
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            width: 100%;
+        }
+        
+        .logo-img {
+            max-height: 50px; 
+            width: auto;
+            display: block; 
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        /* Updated Nav Link Styles with Hover Animation */
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            position: relative;
+            padding-bottom: 5px; /* Space for the underline */
+        }
+        
+        nav ul li a:not(.btn):after { /* Apply underline to non-button links */
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a:hover:not(.btn):after { /* Expand underline on hover for non-button links */
+            width: 100%;
+        }
+
+        /* New style for Contact Us button in nav */
+        nav ul li .btn-nav {
+            padding: 8px 20px; /* Smaller padding than general .btn */
+            font-size: 0.9rem;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-left: 10px; /* Space from previous link */
+            text-decoration: none; /* Ensure no underline */
+        }
+
+        nav ul li .btn-nav:hover {
+            background-color: #2d9249; /* Darker accent on hover */
+            transform: translateY(-2px);
+            color: white; /* Keep text white on hover */
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu {
+            display: none; /* Hidden by default */
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark); /* Ensure it has a color */
+            padding: 5px; /* Make it easier to click */
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .mobile-menu:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--light);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            text-align: left;
+        }
+        
+        .about-text h2:after {
+            left: 0;
+            transform: none;
+        }
+        
+        .problem-solution {
+            margin-top: 2rem;
+        }
+        
+        .problem-solution h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .problem-solution ul {
+            margin-left: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .problem-solution li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            color: var(--dark);
+        }
+        
+        /* Packages Section */
+        .packages {
+            background-color: var(--light);
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .package-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .package-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .package-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .package-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .package-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        
+        .package-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .package-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Market Section */
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);\
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta h2 {
+            color: white;
+        }
+        
+        .cta h2:after {
+            background-color: white;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);\
+            z-index: 1000;\
+            transition: all 0.3s ease;\
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;\
+            }
+            
+            .about-text h2 {
+                text-align: center;
+            }
+            
+            .about-text h2:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            nav {
+                position: fixed; /* Keep it fixed */
+                top: 70px; /* Height of the header */
+                left: 0;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                max-height: 0; /* Start hidden */
+                overflow: hidden;
+                transition: max-height 0.5s ease-out;
+                z-index: 999; /* Below header, above content */
+            }
+            
+            nav.active {
+                max-height: 300px; /* Adjust as needed to fit all links */
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            nav ul li a {
+                padding: 10px 0; /* Add padding for better click area */
+                display: block; /* Make links take full width for click */
+                width: fit-content; /* Adjust width for underline */
+            }
+            
+            /* Ensure the button in mobile menu looks good */
+            nav ul li .btn-nav {
+                margin-left: 0; /* Center the button */
+                margin-top: 10px; /* Space from previous link */
+                display: inline-block; /* Keep button inline-block */
+            }
+            
+            .hero {
+                padding: 180px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .package-card.popular {
+                transform: none;
+            }
+            
+            .package-card.popular:hover {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .services-grid, .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+    <img src="Artboard 3-100.jpg" alt="JYZ COMPUTERS Logo" class="logo-img">
+</div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#packages">Packages</a></li>
+                    <li><a href="#market">Market</a></li>
+                    <li><a href="#contact" class="btn btn-nav">Contact Us</a></li> <!-- Changed class to btn-nav -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Digital Solutions for Kenyan SMEs</h1>
+            <p>Empowering businesses by easing the barriers to establishing a strong online presence and enhancing competitiveness in the digital marketplace.</p>
+            <a href="#packages" class="btn">View Our Packages</a>
+            <a href="#contact" class="btn btn-accent">Get Started</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About JYZ COMPUTERS</h2>
+                    <p>JYZ COMPUTERS is a pioneering digital services company based in Kenya, dedicated to providing innovative and affordable digital solutions to small and medium enterprises (SMEs) and individuals.</p>
+                    
+                    <div class="problem-solution">
+                        <h3>The Problem</h3>
+                        <p>Despite the rapid growth of digital technology in Kenya, many SMEs struggle to harness its potential due to:</p>
+                        <ul>
+                            <li>High Costs: Premium rates that are unaffordable for small businesses</li>
+                            <li>Technical Expertise: Lack of in-house expertise for online presence</li>
+                            <li>Access to Resources: Limited access to reliable internet and digital tools</li>
+                        </ul>
+                        
+                        <h3>Our Solution</h3>
+                        <p>JYZ COMPUTERS addresses these issues through:</p>
+                        <ul>
+                            <li>Affordable Pricing: Competitive pricing without compromising quality</li>
+                            <li>Comprehensive Packages: Bundled services covering all digital needs</li>
+                            <li>Local Support: Robust support system with locally-based experts</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Kenyan Business" style="width:100%; border-radius:8px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Our Digital Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Web Design & Development</h3>
+                    <p>Creating responsive and user-friendly websites tailored to client specifications.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Web Hosting</h3>
+                    <p>Offering reliable and secure hosting solutions with 99.9% uptime guarantee.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>SEO Services</h3>
+                    <p>Enhancing online visibility through optimized content and strategic keyword targeting.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3>Social Media Management</h3>
+                    <p>Building and maintaining engaging social media profiles to connect with target audiences.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Digital Marketing</h3>
+                    <p>Implementing effective marketing campaigns across multiple digital channels.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>E-commerce Integration</h3>
+                    <p>Enabling online sales and payment processing for your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages" id="packages">
+        <div class="container">
+            <h2>Our Service Packages</h2>
+            <div class="packages-grid">
+                <div class="package-card">
+                    <div class="package-name">Marafiki Package</div>
+                    <div class="package-price">Ksh 5,000<span>/Month</span></div>
+                    <ul class="package-features">
+                        <li>Web Design</li>
+                        <li>Web Hosting</li>
+                        <li>Domain Registration</li>
+                        <li>3 Email Accounts</li>
+                    </ul>
+                    <a href="#contact" class="btn">Get Started</a>
+                </div>
+                <div class="package-card">
+                    <div class="package-name">Starter Package</div>
+                    <div class="package-price">Ksh 15,000<span>/Month</span></div>
+                    <ul class="package-features">
+                        <li>Basic Web Design</li>
+                        <li>Web Hosting</li>
+                        <li>Domain Registration</li>
+                        <li>5 Email Accounts</li>
+                        <li>Basic SEO Setup</li>
+                        <li>Mobile Responsive</li>
+                    </ul>
+                    <a href="#contact" class="btn">Get Started</a>
+                </div>
+                
+                <div class="package-card popular">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <div class="package-name">Growth Package</div>
+                    <div class="package-price">Ksh 35,000<span>/Month</span></div>
+                    <ul class="package-features">
+                        <li>Advanced Web Design</li>
+                        <li>Web Hosting</li>
+                        <li>Domain Registration</li>
+                        <li>10 Email Accounts</li>
+                        <li>Advanced SEO</li>
+                        <li>Social Media Management</li>
+                        <li>Content Creation</li>
+                        <li>Monthly Analytics Report</li>
+                    </ul>
+                    <a href="#contact" class="btn">Get Started</a>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-name">Premium Package</div>
+                    <div class="package-price">Ksh 65,000<span>/Month</span></div>
+                    <ul class="package-features">
+                        <li>Custom Web Design</li>
+                        <li>Web Hosting</li>
+                        <li>Domain Registration</li>
+                        <li>Unlimited Email Accounts</li>
+                        <li>Comprehensive SEO</li>
+                        <li>Social Media Management</li>
+                        <li>Digital Marketing Campaigns</li>
+                        <li>E-commerce Integration</li>
+                        <li>Content Creation</li>
+                        <li>Weekly Analytics Report</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <a href="#contact" class="btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Analysis Section -->
+    <section class="market" id="market">
+        <div class="container">
+            <h2>Market Opportunity</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Kenya's digital services sector is rapidly expanding, with the country's internet penetration rate surpassing 90%. The SME sector, accounting for over 70% of the country's GDP, presents a substantial opportunity for digital service providers.</p>
+            
+            <div class="market-stats">
+                <div class="stat-card">
+                    <div class="stat-number">90%+</div>
+                    <div class="stat-label">Internet Penetration in Kenya</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">SME Contribution to GDP</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">Annual Growth Projection</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">Months to Break-even</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Contact us today to discuss how JYZ COMPUTERS can help your SME establish a strong online presence and compete effectively in the digital marketplace.</p>
+            <a href="https://wa.me/+254724775021?text=Hello,%20JYZ%20DIGI%20Hub,%20I%20would%20like%20to%20learn%20more%20about%20your%20services" class="btn btn-accent">Start a Conversation</a>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>JYZ COMPUTERS</h3>
+                    <p>Empowering Kenyan SMEs with innovative and affordable digital solutions for a competitive edge in the digital marketplace.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#packages">Packages</a></li>
+                        <li><a href="#market">Market Analysis</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#services">Web Design & Development</a></li>
+                        <li><a href="#services">Web Hosting</a></li>
+                        <li><a href="#services">SEO Services</a></li>
+                        <li><a href="#services">Social Media Management</a></li>
+                        <li><a href="#services">Digital Marketing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</li>
+                        <li><i class="fas fa-phone"></i> +254 724 775 021</li>
+                        <li><i class="fas fa-envelope\"></i> info@jyzcomputers.co.ke</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2022 JYZ COMPUTERS. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/+254724775021?text=Hello,%20JYZ%20DIGI%20Hub,%20I%20would%20like%20to%20learn%20more%20about%20your%20services" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('nav').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
